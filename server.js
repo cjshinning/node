@@ -1,26 +1,22 @@
 var http = require('http')
+var querystring = require('querystring')
 
 var server = http.createServer(function (req, res) {
-    console.log(req.url, '\n\n')
-    var GET = {}
+    // post=req
 
-    if (req.url.indexOf('?') != -1) {
-        var arr = req.url.split('?')
-        var url = arr[0]
-        var arr2 = arr[1].split('&')
+    var str = ''    //接受数据
 
-        for (var i = 0; i < arr2.length; i++) {
-            var arr3 = arr2[i].split('=')
-            GET[arr3[0]] = arr3[1]
-        }
-    }else{
-        var url=req.url
-    }
-
-
-    console.log(url, GET)
-    res.write('aaa')
-    res.end()
+    // data——有一段数据到达（很多次）
+    var i = 0
+    req.on('data', function(data){
+        console.log(`第${i++}次收到数据`)
+        str += data
+    })
+    // end——数据全部到达（一次）
+    req.on('end',function(){
+        var POST = querystring.parse(str)
+        // console.log(POST)
+    })
 })
 
 server.listen(8080)
