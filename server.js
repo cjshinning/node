@@ -1,20 +1,26 @@
 var http = require('http')
-var fs = require('fs')
 
 var server = http.createServer(function (req, res) {
-    var file_name = './www' + req.url
+    console.log(req.url, '\n\n')
+    var GET = {}
 
-    fs.readFile(file_name, function (err, data) {
-        if (err) {
-            res.write('404')
-        } else {
-            res.write(data)
+    if (req.url.indexOf('?') != -1) {
+        var arr = req.url.split('?')
+        var url = arr[0]
+        var arr2 = arr[1].split('&')
+
+        for (var i = 0; i < arr2.length; i++) {
+            var arr3 = arr2[i].split('=')
+            GET[arr3[0]] = arr3[1]
         }
-        res.end()
-    })
+    }else{
+        var url=req.url
+    }
 
+
+    console.log(url, GET)
+    res.write('aaa')
+    res.end()
 })
 
-// 监听——等着
-// 端口
 server.listen(8080)

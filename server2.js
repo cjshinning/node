@@ -1,24 +1,23 @@
-var http=require('http')
+var http = require('http')
+var querystring = require('querystring')
 
-var server=http.createServer(function(req,res){
-    // console.log('有人来了')
-    // console.log(req.url)
-    switch(req.url){
-        case '/1.html':
-            res.write('111')
-            break;
-        case '/2.html':
-            res.write('222')
-            break;
-        default:
-            res.write('404')
-            break;
+var server = http.createServer(function (req, res) {
+    console.log(req.url, '\n\n')
+    var GET = {}
 
+    if (req.url.indexOf('?') != -1) {
+        var arr = req.url.split('?')
+        var url = arr[0]
+        
+        GET = querystring.parse(arr[1])
+    }else{
+        var url=req.url
     }
-    
-    // res.end()
+
+
+    console.log(url, GET)
+    res.write('aaa')
+    res.end()
 })
 
-// 监听——等着
-// 端口
 server.listen(8080)
