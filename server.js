@@ -1,33 +1,23 @@
 const express = require('express')
+const bodyParser = require('body-parser')
 
-// 1.创建服务
 var server = express()
-
-// 3.处理请求
-// server.use('/a.html', function (req, res) {
-//     res.send({
-//         a: 12,
-//         b: 5
-//     })
-//     res.end()
-// })
-
-// server.use('/b.html', function (req, res) {
-//     res.write('123')
-//     res.end()
-// })
-
-// server.get('/', function(){
-//     console.log('有get')
-// })
-
-// server.post('/', function(){
-//     console.log('有post')
-// })
-
-server.use('/', function(){
-    console.log('有use')
-})
-
-// 2.监听
 server.listen(8080)
+
+// server.use(bodyParser.urlencoded({
+//     extended: true,     //扩展模式
+//     limit: 2*1024*1024  
+// }))
+
+// server.use('/', function(req, res){
+//     // console.log(req.query)  //GET
+//     console.log(req.body)  //POST
+// })
+
+server.use('/', function(req, res, next){
+    console.log('a')
+    next()
+})
+server.use('/', function(){
+    console.log('b')
+})

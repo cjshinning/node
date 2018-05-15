@@ -1,7 +1,13 @@
-中间件
+Express
+1.数据 GET，POST
+2.中间件：使用，写，链式操作
 
------------------------------------
+----------------------
+GET不需要中间件
+req.query
 
-接口：
-/login?user=xxx&pass=xxx
-=>{ok:true,msg:'原因'}
+POST需要bodyParser
+req.body
+
+----------------------
+链式操作
