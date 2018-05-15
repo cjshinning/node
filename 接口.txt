@@ -1,0 +1,18 @@
+用户注册、登录
+
+接口：
+/user?act=reg&user=aaa&pass=123456
+	{"ok":false,"msg":"原因"}
+
+/user?action=login?user=aaa&pass=123456
+	{"ok":true,"msg":"原因"}
+
+
+-------------------------------------
+
+对文件的访问
+http://localhost:8080/1.html
+http://localhost:8080/ajax.js
+http://localhost:8080/2.jpg
+
+对接口的访问
