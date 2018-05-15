@@ -1,0 +1,9 @@
+1.模块里面
+	require——引入
+	exports——输出
+	module.exports——批量输出
+2.npm
+	帮咱们下载模块
+	自动解决依赖问题
+3.node_modules
+	
