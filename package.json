@@ -1,24 +1,6 @@
 {
-  "name": "test0515",
-  "version": "0.0.1",
-  "description": "测试包",
-  "main": "1.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/cjshinning/node.git"
-  },
-  "keywords": [
-    "test",
-    "0515"
-  ],
-  "author": "cj_shinning",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/cjshinning/node/issues"
-  },
-  "homepage": "https://github.com/cjshinning/node#readme"
+  "dependencies": {
+    "express": "^4.16.3",
+    "express-static": "^1.2.5"
+  }
 }
