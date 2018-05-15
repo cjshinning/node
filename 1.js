@@ -1,3 +1,7 @@
-const jade = require('jade')
+var ejs = require('ejs')
 
-console.log(jade.renderFile('./views/1.jade', {pretty: true}))
+ejs.renderFile('./views/1.ejs', {
+    name: 'blue'
+}, function (err, data) {
+    console.log(data)
+})
