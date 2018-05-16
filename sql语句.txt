@@ -56,5 +56,72 @@ ORDER子句——多条件排序
 GROUP子句——合并
   COUNT,MIN,MAX,AVG
 
+-----------------------------------------------------------------------
+
+SELECT * FROM student_table GROUP BY class
+
+1	1	小明	34
+2	2	小红	98
+4	3	小华	99
+
+SELECT class,AVG(score) FROM student_table GROUP BY class
+
+1	26
+2	98
+3	99.5
+
+求每个班级最高分，最低分
+SELECT class,MAX(score),MIN(score) FROM student_table GROUP BY class
+
+1	34	18
+2	98	98
+3	100	99
+3	100	99
+
+-----------------------------------------------
+求每个人的消费总额
+1	blue	3
+2	Jenny	8
+3	张三	28000
+4	李四	81000
+5	王五	5000
+6	赵六	18
+7	blue	18
+8	张三	49000
+9	李四	38000
+
+
+SELECT name,SUM(price) FROM sales_table GROUP BY name ORDER BY SUM(price) DESC
+
+李四	119000
+张三	77000
+王五	5000
+blue	21
+赵六	18
+
+SELECT name,SUM(price) FROM sales_table GROUP BY name ORDER BY SUM(price) ASC
+Jenny	8
+赵六	18
+blue	21
+王五	5000
+张三	77000
+
+*LIMIT-分页
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
