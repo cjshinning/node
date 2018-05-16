@@ -73,23 +73,56 @@ server.get('/', (req,res) => {
 
 server.get('/article', (req, res)=>{
   if(req.query.id) {
-    db.query(`SELECT * FROM article_table WHERE ID=${req.query.id}`, (err, data)=>{
-      if(err){
-        res.status(500).send('数据有问题').end()
-      }else{
-        if(data.length==0){
-          res.status(404).send('您请求的文章找不到').end()
+    if(req.query.act=='like'){
+      // 增加一个赞
+      db.query(`UPDATE article_table	SET n_like=n_like+1 WHERE ID=${req.query.id}`,(err,data)=>{
+        if(err){
+          res.status(500).send('数据库有问题').end()
+          console.log(err)
         }else{
-          var articleData = data[0]
-          articleData.sDate = common.time2date(articleData.post_time.getTime())
-          articleData.content = articleData.content.replace(/^/gm,'<p>').replace(/$/gm,'</p>')
+          // 显示文章
+          db.query(`SELECT * FROM article_table WHERE ID=${req.query.id}`, (err, data)=>{
+            if(err){
+              res.status(500).send('数据有问题').end()
+            }else{
+              if(data.length==0){
+                res.status(404).send('您请求的文章找不到').end()
+              }else{
+                var articleData = data[0]
+                articleData.sDate = common.time2date(articleData.post_time.getTime())
+                articleData.content = articleData.content.replace(/^/gm,'<p>').replace(/$/gm,'</p>')
 
-          res.render('context.ejs', {
-            article_data: articleData
+                res.render('context.ejs', {
+                  article_data: articleData
+                })
+              }
+            }
           })
         }
-      }
-    })
+      })
+ 
+    }else{
+      // 显示文章
+      db.query(`SELECT * FROM article_table WHERE ID=${req.query.id}`, (err, data)=>{
+        if(err){
+          res.status(500).send('数据有问题').end()
+        }else{
+          if(data.length==0){
+            res.status(404).send('您请求的文章找不到').end()
+          }else{
+            var articleData = data[0]
+            articleData.sDate = common.time2date(articleData.post_time.getTime())
+            articleData.content = articleData.content.replace(/^/gm,'<p>').replace(/$/gm,'</p>')
+
+            res.render('context.ejs', {
+              article_data: articleData
+            })
+          }
+        }
+      })
+    }
+
+    
   }else{
     res.status(404).send('您请求的文章找不到').end()
   }
